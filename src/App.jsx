@@ -3,7 +3,7 @@ import WelcomeSplashPage from './WelcomeSplashPage';
 import Header from './Header'; 
 import Floating from './Floating';
 import Home from './Home';
- import FAQ from './FAQ.JSX';
+ import FAQ from './FAQ';
  import TermsAndConditions from './TermsandCconditions';
 
 
