@@ -3,7 +3,7 @@ import WelcomeSplashPage from './WelcomeSplashPage';
 import Header from './Header'; 
 import Floating from './Floating';
 import Home from './Home';
- import FAQ from './FAQ';
+ import Frequent from './Frequent';
  import TermsAndConditions from './TermsandCconditions';
 
 
@@ -46,7 +46,7 @@ function App() {
                         <LazyWhyChooseUs />
                         <LazyProductSpecifications />
                         <LazySupplyCapacity />
-                              <FAQ />       
+                              <Frequent />       
 
                         <LazyMarkets />
                         <LazyFinalCTA />

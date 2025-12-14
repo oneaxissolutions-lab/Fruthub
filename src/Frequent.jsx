@@ -73,7 +73,7 @@ const groupFAQsByCategory = (faqs) => {
   }, {});
 };
 
-const FAQ= () => {
+const Frequent= () => {
   const [openId, setOpenId] = useState(null);
 
   const toggleFAQ = (id) => {
@@ -155,4 +155,4 @@ const FAQ= () => {
   );
 };
 
-export default FAQ;
+export default Frequent;
