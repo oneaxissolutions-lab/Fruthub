@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react'; 
 
-import FrutsHub_logo from './assets/FrutsHub_logo.png';
+// *** यहाँ सुधार किया गया है - केसिंग (Case) को ठीक करें ***
+// Vercel build log के आधार पर, यह नाम गलत हो सकता है।
+// अपनी assets फ़ोल्डर में वास्तविक फ़ाइल के नाम से इसे बदलें।
+import FrutsHub_logo from './assets/frutshub_logo.png'; // <- CASE CHANGED HERE!
 
 
 const navigation = [
     
-    { name: 'Home', href: '#home' },                   
-    { name: 'About', href: '#about-us' },             
+    { name: 'Home', href: '#home' },               
+    { name: 'About', href: '#about-us' },           
     { name: 'Products', href: '#products' },          
     { name: 'Quality & Process', href: '#quality-process' }, 
     { name: 'Packaging', href: '#packaging' },           
-    { name: 'Markets', href: '#markets' },             
-    { name: 'FAQs', href: '#faqs' },                   
+    { name: 'Markets', href: '#markets' },           
+    { name: 'FAQs', href: '#faqs' },                     
 ];
 
 
-const COLOR_DEEP_GREEN = 'bg-[WHITE]';       
-const COLOR_DARK_FOREST = 'text-[#064422]';   
-const COLOR_BANANA_YELLOW = 'bg-[#F4C430]';   
+const COLOR_DEEP_GREEN = 'bg-[WHITE]';      
+const COLOR_DARK_FOREST = 'text-[#064422]';  
+const COLOR_BANANA_YELLOW = 'bg-[#F4C430]';  
 const COLOR_CTA_HOVER = 'hover:bg-[#E47900]'; 
 const COLOR_CTA_ACTIVE = 'active:bg-[#E47900]'; 
 const COLOR_TRADE_BLUE = 'text-[#222222]';    
@@ -29,8 +32,8 @@ const DEFAULT_TEXT_COLOR = 'text-[#222222]';
 
 
 const CTA_CLASSES = `${COLOR_BANANA_YELLOW} ${COLOR_CTA_HOVER} ${COLOR_CTA_ACTIVE} ${COLOR_DARK_FOREST} 
-                      font-montserrat font-bold py-2 px-4 rounded-full shadow-md 
-                      transition duration-300 transform hover:scale-105 active:scale-[0.98] whitespace-nowrap`;
+                     font-montserrat font-bold py-2 px-4 rounded-full shadow-md 
+                     transition duration-300 transform hover:scale-105 active:scale-[0.98] whitespace-nowrap`;
 
 
 const Header = () => {
@@ -49,12 +52,12 @@ const Header = () => {
         
         <header  
           className={`fixed top-4 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl 
-                      ${COLOR_DEEP_GREEN} shadow-2xl rounded-xl z-[1000] overflow-hidden 
-                      will-change-transform border-4 border-[#0b6A32]
-                      
-                      // *** ADDED GREEN BORDER HERE ***
-                      border-2 border-[${HOVER_GREEN}]
-                      
+                     ${COLOR_DEEP_GREEN} shadow-2xl rounded-xl z-[1000] overflow-hidden 
+                     will-change-transform border-4 border-[#0b6A32]
+                     
+                     // *** ADDED GREEN BORDER HERE ***
+                     border-2 border-[${HOVER_GREEN}]
+                     
                     `} 
         >
             <div className="px-4 sm:px-6 lg:px-8">
@@ -73,7 +76,7 @@ const Header = () => {
                         </a>
                     </div>
 
-            
+                
                     <div className="hidden md:flex items-center space-x-8">
                         
                         <nav className="flex space-x-4 text-sm font-lato font-medium">
@@ -82,13 +85,13 @@ const Header = () => {
                                     key={item.name}
                                     href={item.href}
                                     className={`${DEFAULT_TEXT_COLOR} 
-                                              hover:text-[${HOVER_GREEN}] 
-                                              hover:underline 
-                                              hover:underline-offset-4 
-                                              hover:decoration-[${HOVER_GREEN}]
-                                              hover:decoration-2
-                                              px-1 py-2 rounded-md 
-                                              transition duration-200 transform hover:-translate-y-[2px] whitespace-nowrap`}
+                                             hover:text-[${HOVER_GREEN}] 
+                                             hover:underline 
+                                             hover:underline-offset-4 
+                                             hover:decoration-[${HOVER_GREEN}]
+                                             hover:decoration-2
+                                             px-1 py-2 rounded-md 
+                                             transition duration-200 transform hover:-translate-y-[2px] whitespace-nowrap`}
                                 >
                                     {item.name}
                                 </a>
@@ -110,7 +113,7 @@ const Header = () => {
                             onClick={toggleMenu}
                             type="button"
                             className={`inline-flex items-center justify-center p-2 rounded-md text-[#222222] hover:text-[#0B6A32] 
-                                       focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#0B6A32] transition duration-200`}
+                                        focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#0B6A32] transition duration-200`}
                             aria-expanded={isMenuOpen}
                         >
                             <span className="sr-only">Open main menu</span>
@@ -136,7 +139,7 @@ const Header = () => {
                             key={item.name}
                             href={item.href}
                             className={`block w-full text-center text-base font-lato font-medium text-white hover:bg-[#00000033] py-2 rounded-md transition duration-200 
-                                         transform active:scale-[0.98] hover:scale-[1.01]`}
+                                            transform active:scale-[0.98] hover:scale-[1.01]`}
                             onClick={closeMenu} 
                         >
                             {item.name}
