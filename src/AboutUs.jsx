@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-// --- Import all five required images from assets (Ensure these paths are correct in your project) ---
 import image1 from './assets/image1.jpg';
 import image2 from './assets/image2.jpg';
 import image3 from './assets/image3.jpg';
 import image4 from './assets/image4.jpg';
 import image5 from './assets/image5.jpg';
 
-// --- CONSTANT COLOR VALUES (Matching site theme) ---
 const COLORS = {
     DeepGreen: '#0B6A32',
     BananaYellow: '#F4C430',
@@ -18,13 +16,11 @@ const COLORS = {
     CTAHover: '#E47900',
 };
 
-// --- Inline Style for Custom Fonts ---
 const FONT_STYLES = {
     heading: { fontFamily: 'Montserrat, sans-serif' },
     body: { fontFamily: 'Lato, sans-serif' },
 };
 
-// --- Data for the 5 Small Images ---
 const keyDifferentiators = [
     { image: image1, alt: 'Farm Sourcing' },
     { image: image2, alt: 'Reefer Packaging' },
@@ -33,22 +29,72 @@ const keyDifferentiators = [
     { image: image5, alt: 'Family Legacy' },
 ];
 
+const differentiatorCards = [
+    { title: 'Farm Selection', description: 'Quality checks begin at the source.' },
+    { title: 'Maturity-Level Harvesting', description: 'Picked at the optimal stage for global transit.' },
+    { title: 'Grading & Washing', description: 'Strict sorting and cleaning for international standards.' },
+    { title: 'Protective Packing', description: 'High-quality primary and secondary packing.' },
+    { title: 'Cold Chain & Reefer Loading', description: 'Maintained low temperatures until shipment.' },
+    { title: 'Primary Sourcing Belts', description: 'Madhya Pradesh, Maharashtra & South India.', highlight: true },
+    { title: 'MOQ (Minimum Order)', description: '1 ton for domestic/trial. FCL recommended for exports.', highlight: true },
+];
+
 
 const AboutUs = () => {
+    const [isContentVisible, setIsContentVisible] = useState(false);
+    const sectionRef = useRef(null);
     
-    // Function to handle button hover in
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsContentVisible(true);
+                    observer.unobserve(entry.target); 
+                }
+            },
+            {
+                root: null, 
+                rootMargin: '0px',
+                threshold: 0.2, 
+            }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
+
+
     const handleMouseEnter = (e) => {
         e.currentTarget.style.backgroundColor = COLORS.CTAHover;
     };
 
-    // Function to handle button hover out
     const handleMouseLeave = (e) => {
         e.currentTarget.style.backgroundColor = COLORS.BananaYellow;
     };
+    
+    const slideInRightTransition = (delay = 0) => ({
+        opacity: isContentVisible ? 1 : 0,
+        transform: isContentVisible ? 'translateX(0) translateZ(0)' : 'translateX(50px) translateZ(0)', 
+        transition: `opacity 0.8s ease-out ${delay}s, transform 0.8s ease-out ${delay}s`,
+        willChange: 'transform, opacity', 
+    });
 
-    // --- Custom CSS for the Glowing and Sliding Animations ---
+    const slideUpTransition = (delay = 0) => ({
+        opacity: isContentVisible ? 1 : 0,
+        transform: isContentVisible ? 'translateY(0) translateZ(0)' : 'translateY(30px) translateZ(0)', 
+        transition: `opacity 0.6s ease-out ${delay}s, transform 0.6s ease-out ${delay}s`,
+        willChange: 'transform, opacity', 
+    });
+
+
     const ANIMATION_CSS = `
-        /* 1. GLOWING ANIMATION KEYFRAMES (The "Lights Effect") */
         @keyframes text-glow {
             0%, 100% { 
                 text-shadow: 0 0 5px rgba(244, 196, 48, 0.4); 
@@ -60,42 +106,46 @@ const AboutUs = () => {
 
         .glow-animate {
             animation: text-glow 3s ease-in-out infinite;
-        }
-
-        /* 2. SLIDE-IN-LEFT KEYFRAMES */
-        @keyframes slide-in-left {
-            0% {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        .slide-animate {
-            opacity: 0; 
-            animation: slide-in-left 0.7s ease-out forwards;
+            will-change: text-shadow; 
         }
     `;
-
-    // Base delay for the first text element
-    const BASE_DELAY = 0.5;
+    
+    const TEXT_BASE_DELAY = 0.1;
+    const CARD_BASE_DELAY = 1.2; 
 
     return (
-        <section className="py-20" style={{ backgroundColor: COLORS.Background }}>
+        <section 
+            id="about-us" 
+            className="py-20" 
+            style={{ 
+                backgroundColor: COLORS.Background,
+                willChange: 'scroll-position', 
+            }}
+            ref={sectionRef} 
+        >
             
-            {/* Inject the custom CSS animation styles */}
             <style>{ANIMATION_CSS}</style>
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                {/* --- Two-Column Layout (Images Left, Text Right) --- */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
                     
-                    {/* LEFT COLUMN: 5 Small Image Grid */}
-                    <div className="relative p-4" style={{ backgroundColor: 'white', borderRadius: '1rem', boxShadow: '0 10px 20px rgba(0,0,0,0.05)' }}>
+                    
+                    <div 
+                        className="relative p-4" 
+                        style={{ 
+                            backgroundColor: 'white', 
+                            borderRadius: '1rem', 
+                            boxShadow: '0 10px 20px rgba(0,0,0,0.05)',
+                            
+                            opacity: isContentVisible ? 1 : 0,
+                            transform: isContentVisible ? 'translateX(0) translateZ(0)' : 'translateX(-50px) translateZ(0)',
+                            transition: `opacity 0.8s ease-out ${TEXT_BASE_DELAY}s, transform 0.8s ease-out ${TEXT_BASE_DELAY}s`,
+                            willChange: 'transform, opacity', 
+                        }}
+                    >
                         <div className="grid grid-cols-3 gap-4">
                             
                             {keyDifferentiators.map((img, index) => (
@@ -114,76 +164,140 @@ const AboutUs = () => {
                         </div>
                     </div>
 
-                    {/* RIGHT COLUMN: Text Content (Animations Applied) */}
+                    
                     <div>
                         
-                        {/* Heading: GLOW ANIMATION + SLIDE-IN (Delay 1) */}
+                        
                         <h2 
-                            className="text-4xl font-extrabold mb-6 glow-animate slide-animate" 
+                            className="text-4xl font-extrabold mb-6 glow-animate" 
                             style={{ 
                                 color: COLORS.DarkForest, 
                                 ...FONT_STYLES.heading,
-                                animationDelay: `${BASE_DELAY}s` 
+                                ...slideInRightTransition(TEXT_BASE_DELAY) 
                             }}
                         >
-                            About Fruthub Exports
+                            About Fruthub Exports Private Limited
                         </h2>
                         
-                        {/* Paragraph 1 (SLIDE-IN, Delay 2) */}
+                        
                         <p 
-                            className="text-lg leading-relaxed mb-4 slide-animate" 
+                            className="text-lg leading-relaxed mb-4" 
                             style={{ 
                                 color: COLORS.TextGrey, 
                                 ...FONT_STYLES.body,
-                                animationDelay: `${BASE_DELAY + 0.2}s` 
+                                ...slideInRightTransition(TEXT_BASE_DELAY + 0.2) 
                             }}
                         >
-                            Fruthub Exports Pvt. Ltd. is built on a family legacy of over 100 years in the banana trade in India.
+                            Fruthub carries a 100-year-old family legacy in India’s banana trade. For generations, our family supplied bananas to major domestic mandis all across India.
                         </p>
                         
-                        {/* Paragraph 2 (SLIDE-IN, Delay 3) */}
+                        
                         <p 
-                            className="text-lg leading-relaxed mb-4 slide-animate" 
+                            className="text-lg leading-relaxed mb-4" 
                             style={{ 
                                 color: COLORS.TextGrey, 
                                 ...FONT_STYLES.body,
-                                animationDelay: `${BASE_DELAY + 0.4}s` 
+                                ...slideInRightTransition(TEXT_BASE_DELAY + 0.4) 
                             }}
                         >
-                            From sourcing at the farm level to final container loading, we manage the complete supply chain to deliver bananas that meet international standards in color, size, and shelf life.
+                            Today, Fruthub Exports Private Limited combines this century-old experience with modern packhouse systems to deliver premium Cavendish bananas to international importers.
                         </p>
                         
-                        {/* Paragraph 3 (SLIDE-IN, Delay 4) */}
+                        
                         <p 
-                            className="text-lg leading-relaxed mb-8 slide-animate" 
+                            className="text-lg leading-relaxed mb-8" 
                             style={{ 
                                 color: COLORS.TextGrey, 
                                 ...FONT_STYLES.body,
-                                animationDelay: `${BASE_DELAY + 0.6}s` 
+                                ...slideInRightTransition(TEXT_BASE_DELAY + 0.6) 
                             }}
                         >
                             We source from high-yield banana belts in Madhya Pradesh, Maharashtra and South India, ensuring round-the-year availability.
                         </p>
 
-                        {/* Button (SLIDE-IN, Delay 5) */}
-                        <a href="/about" className="inline-block slide-animate" 
-                           style={{ animationDelay: `${BASE_DELAY + 0.8}s` }}>
-                          <button 
-                            className={`px-8 py-3 rounded-xl text-lg font-bold shadow-md transform hover:scale-105 transition duration-300`}
-                            style={{ 
-                                backgroundColor: COLORS.BananaYellow, 
-                                color: COLORS.DarkForest, 
-                                fontFamily: FONT_STYLES.heading.fontFamily,
-                            }}
-                            onMouseEnter={handleMouseEnter}
-                            onMouseLeave={handleMouseLeave}
-                          >
-                            Know More About Us
-                          </button>
+                        
+                        <a href="/about" className="inline-block" 
+                            style={slideInRightTransition(TEXT_BASE_DELAY + 0.8)}> 
+                            <button 
+                                className={`px-8 py-3 rounded-xl text-lg font-bold shadow-md transform hover:scale-105 transition duration-300`}
+                                style={{ 
+                                    backgroundColor: COLORS.BananaYellow, 
+                                    color: COLORS.DarkForest, 
+                                    fontFamily: FONT_STYLES.heading.fontFamily,
+                                }}
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                Know More About Us
+                            </button>
                         </a>
                         
                     </div>
                 </div>
+                
+                
+                
+                <div className="mt-16 pt-10 border-t border-gray-300">
+                    
+                    
+                    <h3 
+                        className="text-3xl font-bold mb-10 text-center" 
+                        style={{ 
+                            color: COLORS.DeepGreen, 
+                            ...FONT_STYLES.heading,
+                            ...slideUpTransition(CARD_BASE_DELAY) 
+                        }}
+                    >
+                        Our Supply Chain Advantage
+                    </h3>
+
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
+                        
+                        {differentiatorCards.map((item, index) => (
+                            <div 
+                                key={index} 
+                                className={`
+                                    p-4 rounded-lg shadow-md flex flex-col justify-between h-full 
+                                    ${item.highlight ? 'bg-white' : 'bg-white/90'}
+                                    
+                                    group relative transition duration-300 cursor-pointer
+                                    hover:bg-[${COLORS.BananaYellow}]
+                                    hover:z-20
+                                    transform hover:scale-[1.05] hover:translate-y-[-2px] 
+                                `}
+                                style={{ 
+                                    
+                                    ...slideUpTransition(CARD_BASE_DELAY + 0.15 + (index * 0.1)), 
+                                    border: `2px solid ${item.highlight ? COLORS.BananaYellow : COLORS.DeepGreen}`,
+                                }}
+                            >
+                                
+                                <h4 
+                                    className={`
+                                        text-sm md:text-md font-bold mb-1 transition duration-300
+                                        ${item.highlight ? 'text-[' + COLORS.DarkForest + '] group-hover:text-[' + COLORS.DeepGreen + ']' : 'text-[' + COLORS.DeepGreen + '] group-hover:text-[' + COLORS.DarkForest + ']'} 
+                                    `} 
+                                    style={FONT_STYLES.heading}
+                                >
+                                    {item.title}
+                                </h4>
+                                <p 
+                                    className={`
+                                        text-xs md:text-sm transition duration-300
+                                        ${'text-[' + COLORS.TextGrey + '] group-hover:text-[' + COLORS.DarkForest + ']'}
+                                    `} 
+                                    style={FONT_STYLES.body}
+                                >
+                                    {item.description}
+                                </p>
+                            </div>
+                        ))}
+
+                    </div>
+                </div>
+                
+
             </div>
         </section>
     );

@@ -2,6 +2,9 @@ import React, { useState, lazy, Suspense } from 'react';
 import WelcomeSplashPage from './WelcomeSplashPage';
 import Header from './Header'; 
 import Home from './Home';
+ import FAQ from './FAQ.JSX';
+ import TermsAndConditions from './TermsandCconditions';
+
 
 // Lazy load components below the fold for performance optimization
 const LazyAboutUs = lazy(() => import('./AboutUs'));
@@ -10,6 +13,7 @@ const LazyProductSpecifications = lazy(() => import('./ProductSpecifications'));
 const LazySupplyCapacity = lazy(() => import('./SupplyCapacity'));
 const LazyMarkets = lazy(() => import('./Markets'));
 const LazyFinalCTA = lazy(() => import('./FinalCTA'));
+
 const LazyFooter = lazy(() => import('./Footer'));
 
 function App() {
@@ -41,9 +45,11 @@ function App() {
                         <LazyWhyChooseUs />
                         <LazyProductSpecifications />
                         <LazySupplyCapacity />
+                              <FAQ />       
+
                         <LazyMarkets />
                         <LazyFinalCTA />
-                        
+                        <TermsAndConditions />
                         <div className="h-20"></div> 
                         <LazyFooter />
                     </Suspense>
