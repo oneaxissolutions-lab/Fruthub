@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense } from 'react';
 import WelcomeSplashPage from './WelcomeSplashPage';
 import Header from './Header'; 
+import Floating from './Floating';
 import Home from './Home';
  import FAQ from './FAQ.JSX';
  import TermsAndConditions from './TermsandCconditions';
@@ -36,7 +37,7 @@ function App() {
             {isLoaded && (
                 <main>
                     <Header />
-                    
+                    <Floating />
                     <Home /> 
                     
                     {/* Use Suspense for the Lazy Loaded Sections */}
