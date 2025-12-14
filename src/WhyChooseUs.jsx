@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import backgroundImage from './background.jpg'; 
+import backgroundImage from './assets/background.jpg'; // Ensure this path is correct
 
 
 const COLORS = {
