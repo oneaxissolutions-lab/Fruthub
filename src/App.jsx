@@ -9,7 +9,7 @@ import Home from './Home';
 
 // Lazy load components below the fold for performance optimization
 const LazyAboutUs = lazy(() => import('./AboutUs'));
-const LazyWhyChooseUs = lazy(() => import('./assets/WhyChooseUs'));
+const LazyWhyChooseUs = lazy(() => import('./WhyChooseUs'));
 const LazyProductSpecifications = lazy(() => import('./ProductSpecifications'));
 const LazySupplyCapacity = lazy(() => import('./SupplyCapacity'));
 const LazyMarkets = lazy(() => import('./Markets'));
