@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react'; 
 
-import FrutsHub_logo from './assets/frutshub_logo.png'; 
+import FrutsHub_logo from './assets/fruthub.png'; 
 
 const navigation = [
     { name: 'Home', href: '#home' },               
