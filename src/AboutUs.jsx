@@ -47,14 +47,15 @@ const AboutUs = () => {
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsContentVisible(true);
-                    observer.unobserve(entry.target); 
-                }
+                
+                setIsContentVisible(entry.isIntersecting);
+                
+                
             },
             {
                 root: null, 
                 rootMargin: '0px',
+               
                 threshold: 0.2, 
             }
         );
@@ -78,14 +79,24 @@ const AboutUs = () => {
     const handleMouseLeave = (e) => {
         e.currentTarget.style.backgroundColor = COLORS.BananaYellow;
     };
-    
+   
     const slideInRightTransition = (delay = 0) => ({
         opacity: isContentVisible ? 1 : 0,
         transform: isContentVisible ? 'translateX(0) translateZ(0)' : 'translateX(50px) translateZ(0)', 
         transition: `opacity 0.8s ease-out ${delay}s, transform 0.8s ease-out ${delay}s`,
         willChange: 'transform, opacity', 
     });
+    
+    
+    const slideInLeftTransition = (delay = 0) => ({
+        opacity: isContentVisible ? 1 : 0,
+        transform: isContentVisible ? 'translateX(0) translateZ(0)' : 'translateX(-50px) translateZ(0)', 
+        transition: `opacity 0.8s ease-out ${delay}s, transform 0.8s ease-out ${delay}s`,
+        willChange: 'transform, opacity', 
+    });
 
+
+   
     const slideUpTransition = (delay = 0) => ({
         opacity: isContentVisible ? 1 : 0,
         transform: isContentVisible ? 'translateY(0) translateZ(0)' : 'translateY(30px) translateZ(0)', 
@@ -111,7 +122,8 @@ const AboutUs = () => {
     `;
     
     const TEXT_BASE_DELAY = 0.1;
-    const CARD_BASE_DELAY = 1.2; 
+    const IMAGE_BASE_DELAY = 0.4;
+    const CARD_BASE_DELAY = 1.6; 
 
     return (
         <section 
@@ -130,9 +142,11 @@ const AboutUs = () => {
                 
                 
                 
+                
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
                     
                     
+                   
                     <div 
                         className="relative p-4" 
                         style={{ 
@@ -140,16 +154,19 @@ const AboutUs = () => {
                             borderRadius: '1rem', 
                             boxShadow: '0 10px 20px rgba(0,0,0,0.05)',
                             
-                            opacity: isContentVisible ? 1 : 0,
-                            transform: isContentVisible ? 'translateX(0) translateZ(0)' : 'translateX(-50px) translateZ(0)',
-                            transition: `opacity 0.8s ease-out ${TEXT_BASE_DELAY}s, transform 0.8s ease-out ${TEXT_BASE_DELAY}s`,
-                            willChange: 'transform, opacity', 
+                            
+                            ...slideInLeftTransition(TEXT_BASE_DELAY)
                         }}
                     >
                         <div className="grid grid-cols-3 gap-4">
                             
                             {keyDifferentiators.map((img, index) => (
-                                <div key={index} className="aspect-w-1 aspect-h-1">
+                                <div 
+                                    key={index} 
+                                    className="aspect-w-1 aspect-h-1"
+                                   
+                                    style={slideUpTransition(IMAGE_BASE_DELAY + (index * 0.15))}
+                                >
                                     <img 
                                         src={img.image} 
                                         alt={img.alt} 
@@ -165,7 +182,9 @@ const AboutUs = () => {
                     </div>
 
                     
+                   
                     <div>
+                        
                         
                         
                         <h2 
@@ -173,6 +192,7 @@ const AboutUs = () => {
                             style={{ 
                                 color: COLORS.DarkForest, 
                                 ...FONT_STYLES.heading,
+                               
                                 ...slideInRightTransition(TEXT_BASE_DELAY) 
                             }}
                         >
@@ -180,11 +200,13 @@ const AboutUs = () => {
                         </h2>
                         
                         
+                        
                         <p 
                             className="text-lg leading-relaxed mb-4" 
                             style={{ 
                                 color: COLORS.TextGrey, 
                                 ...FONT_STYLES.body,
+                               
                                 ...slideInRightTransition(TEXT_BASE_DELAY + 0.2) 
                             }}
                         >
@@ -192,11 +214,13 @@ const AboutUs = () => {
                         </p>
                         
                         
+                        
                         <p 
                             className="text-lg leading-relaxed mb-4" 
                             style={{ 
                                 color: COLORS.TextGrey, 
                                 ...FONT_STYLES.body,
+                               
                                 ...slideInRightTransition(TEXT_BASE_DELAY + 0.4) 
                             }}
                         >
@@ -204,11 +228,13 @@ const AboutUs = () => {
                         </p>
                         
                         
+                        
                         <p 
                             className="text-lg leading-relaxed mb-8" 
                             style={{ 
                                 color: COLORS.TextGrey, 
                                 ...FONT_STYLES.body,
+                             
                                 ...slideInRightTransition(TEXT_BASE_DELAY + 0.6) 
                             }}
                         >
@@ -216,7 +242,9 @@ const AboutUs = () => {
                         </p>
 
                         
+                        
                         <a href="/about" className="inline-block" 
+                           
                             style={slideInRightTransition(TEXT_BASE_DELAY + 0.8)}> 
                             <button 
                                 className={`px-8 py-3 rounded-xl text-lg font-bold shadow-md transform hover:scale-105 transition duration-300`}
@@ -237,7 +265,10 @@ const AboutUs = () => {
                 
                 
                 
+                
+                
                 <div className="mt-16 pt-10 border-t border-gray-300">
+                    
                     
                     
                     <h3 
@@ -245,12 +276,14 @@ const AboutUs = () => {
                         style={{ 
                             color: COLORS.DeepGreen, 
                             ...FONT_STYLES.heading,
+                          
                             ...slideUpTransition(CARD_BASE_DELAY) 
                         }}
                     >
                         Our Supply Chain Advantage
                     </h3>
 
+                    
                     
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
                         
@@ -268,7 +301,8 @@ const AboutUs = () => {
                                 `}
                                 style={{ 
                                     
-                                    ...slideUpTransition(CARD_BASE_DELAY + 0.15 + (index * 0.1)), 
+                                    
+                                    ...slideUpTransition(CARD_BASE_DELAY + 0.3 + (index * 0.15)), 
                                     border: `2px solid ${item.highlight ? COLORS.BananaYellow : COLORS.DeepGreen}`,
                                 }}
                             >

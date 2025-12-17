@@ -1,1 +1,27 @@
 @import "tailwindcss";
+/* ==============================================
+   PART 1: Global CSS (e.g., src/index.css or globals.css)
+   This defines the animation for Tailwind to use.
+   ============================================== */
+
+/* --- Custom Keyframes for Slide-Up/Fade-In Animation --- */
+@keyframes revealUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Starts 20px below */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Ends at its position */
+    }
+}
+
+/* --- Utility Class Definition (Must be defined globally) --- */
+.animate-reveal-up {
+    animation-name: revealUp;
+    animation-duration: 0.6s; 
+    animation-timing-function: ease-out;
+    animation-fill-mode: both; 
+    /* This ensures the element is invisible before the JS adds the class */
+    opacity: 0; 
+}

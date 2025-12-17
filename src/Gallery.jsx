@@ -1,58 +1,92 @@
-import React from "react";
+import React from 'react';
 
-// Images directly from src
-import gallery1 from "./gallery1.jpeg";
-import gallery2 from "./gallery2.jpeg";
-import gallery3 from "./gallery3.jpeg";
-import gallery4 from "./gallery4.jpeg";
-import gallery5 from "./gallery5.jpeg";
-import gallery6 from "./gallery6.jpeg";
-import gallery7 from "./gallery7.jpeg";
-import gallery8 from "./gallery8.jpeg";
-import gallery9 from "./gallery9.jpeg";
+// --- 1. Import all images directly ---
+// NOTE: Ensure these paths are correct for your project structure.
+import img from './assets/img.jpeg';
+import img2 from './assets/img2.jpeg';
+import img3 from './assets/img3.jpeg';
+import img4 from './assets/img4.jpeg';
+import img5 from './assets/img5.jpeg';
+import img6 from './assets/img6.jpeg';
+import img7 from './assets/img7.jpeg';
+import img8 from './assets/img8.jpeg';
+import img9 from './assets/img9.jpeg';
 
+
+// --- 2. Define Image Data using the imported variables ---
 const images = [
-  { id: 1, src: gallery1, title: "Gallery Item 1" },
-  { id: 2, src: gallery2, title: "Gallery Item 2" },
-  { id: 3, src: gallery3, title: "Gallery Item 3" },
-  { id: 4, src: gallery4, title: "Gallery Item 4" },
-  { id: 5, src: gallery5, title: "Gallery Item 5" },
-  { id: 6, src: gallery6, title: "Gallery Item 6" },
-  { id: 7, src: gallery7, title: "Gallery Item 7" },
-  { id: 8, src: gallery8, title: "Gallery Item 8" },
-  { id: 9, src: gallery9, title: "Gallery Item 9" },
+  { id: 1, src: img, alt: 'Image 1: Abstract Red Theme' },
+  { id: 2, src: img2, alt: 'Image 2: Lush Green Theme' },
+  { id: 3, src: img3, alt: 'Image 3: Deep Blue Theme' },
+  { id: 4, src: img4, alt: 'Image 4: Purple Night Theme' },
+  { id: 5, src: img5, alt: 'Image 5: Bright Yellow Theme' },
+  { id: 6, src: img6, alt: 'Image 6: Cool Cyan Theme' },
+  { id: 7, src: img7, alt: 'Image 7: Warm Orange Theme' },
+  { id: 8, src: img8, alt: 'Image 8: Regal Indigo Theme' },
+  { id: 9, src: img9, alt: 'Image 9: Fresh Mint Theme' },
 ];
 
-export default function Gallery() {
+const Gallery = () => {
   return (
-    <section className="min-h-screen bg-gray-50 p-8">
-      <h1 className="text-4xl font-extrabold text-center mb-12 text-gray-800">
-        Image Gallery
+    // Background changed to white (bg-white)
+    <div className="min-h-screen bg-white p-4 md:p-8 perspective-1000">
+      
+      {/* Gallery Header with Animation (text changed to dark gray) */}
+      <h1 className="text-5xl font-extrabold text-gray-800 text-center drop-shadow-lg mb-12 animate-fade-in">
+         Gallery
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {/* Responsive Grid Container */}
+      <div className="container mx-auto grid 
+                      grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 
+                      gap-6">
+        
         {images.map((image) => (
-          <div
-            key={image.id}
-            className="bg-white rounded-xl overflow-hidden border-2 border-green-500
-                       shadow-lg shadow-green-500/40 hover:scale-105
-                       transition duration-300"
+          // This wrapper acts as the "Scene"
+          <div 
+            key={image.id} 
+            className="group h-0 pb-[100%] relative cursor-pointer"
           >
-            <img
-              src={image.src}
-              alt={image.title}
-              className="w-full h-64 object-cover"
-            />
+            {/* The Flipping Container */}
+            <div className="absolute inset-0 w-full h-full rounded-2xl shadow-2xl transition-transform duration-700 ease-in-out transform-gpu 
+                          group-hover:rotate-y-180 preserve-3d">
+              
+              {/* --- FRONT FACE: The Image Card (Cleaned up) --- */}
+              <div 
+                className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden 
+                           backface-hidden shadow-2xl"
+                style={{ 
+                  backgroundImage: `url(${image.src})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                {/* REMOVED: Placeholder text div from here */}
+              </div>
 
-            <div className="p-4 text-center">
-              <h2 className="text-lg font-bold text-gray-900">
-                {image.title}
-              </h2>
-              <p className="text-sm text-green-700">Format: JPEG</p>
+              {/* --- BACK FACE: The Glassmorphism Caption (White background will make this look subtle) --- */}
+              <div className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden 
+                              backface-hidden rotate-y-180 
+                              
+                              /* Glassmorphism Styles: Increased opacity for visibility on white BG */
+                              backdrop-blur-sm bg-gray-100/30 border border-gray-300/50
+                              flex items-center justify-center p-4">
+                
+                <p className="text-gray-800 text-xl font-semibold drop-shadow-lg text-center select-none">
+                  {image.alt}
+                </p>
+              </div>
             </div>
+            
+             {/* Hidden image element for accessibility */}
+            <img src={image.src} alt={image.alt} className="sr-only" />
+
           </div>
         ))}
+
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default Gallery;

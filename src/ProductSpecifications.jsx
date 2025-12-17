@@ -29,7 +29,7 @@ const fadeInKeyframes = `
     }
 `;
 
-// Styles for staggered animations
+
 const headingAnimation = {
     animation: 'fadeInUp 1s ease-out 0s forwards',
     opacity: 0,
@@ -57,9 +57,7 @@ const accentLineAnimation = {
 const ProductSpecifications = () => {
     const [isHovering, setIsHovering] = useState(false);
 
-    const backgroundStyle = {
-        backgroundImage: `linear-gradient(to right, ${COLORS.TradeBlue}, ${COLORS.DeepGreen})`, 
-    };
+    // backgroundStyle has been removed.
 
     const ctaButtonStyle = {
         backgroundColor: COLORS.BananaYellow,
@@ -74,7 +72,8 @@ const ProductSpecifications = () => {
     };
     
     return (
-        <section className="py-24 md:py-32" style={backgroundStyle}>
+        // Removed the style={backgroundStyle} prop
+        <section className="py-24 md:py-32">
             
             <style>
                 {pulseKeyframes}
