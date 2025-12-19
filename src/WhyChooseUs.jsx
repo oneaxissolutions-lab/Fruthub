@@ -32,11 +32,11 @@ const differentiators = [
 const WhyChooseUs = () => {
     const [isVisible, setIsVisible] = useState(false); 
     const [isHovering, setIsHovering] = useState(false); 
-    const [columns, setColumns] = useState(3); // Track dynamic columns
+    const [columns, setColumns] = useState(3); 
     const sectionRef = useRef(null);
 
     useEffect(() => {
-        // Fix for mobile: Calculate columns based on window width
+        
         const updateColumns = () => {
             if (window.innerWidth >= 1024) setColumns(3);
             else if (window.innerWidth >= 768) setColumns(2);
@@ -48,7 +48,7 @@ const WhyChooseUs = () => {
 
         const observer = new IntersectionObserver(
             ([entry]) => { setIsVisible(entry.isIntersecting); },
-            { root: null, rootMargin: '0px', threshold: 0.1 } // Lower threshold for mobile reliability
+            { root: null, rootMargin: '0px', threshold: 0.1 } 
         );
 
         if (sectionRef.current) observer.observe(sectionRef.current);
@@ -59,7 +59,7 @@ const WhyChooseUs = () => {
         };
     }, []);
     
-    // Responsive Dispersal Animation Logic
+    
     const disperseCardTransition = (index, baseDelay = 0.1) => {
         const DURATION = '1.2s'; 
         const EASE = 'cubic-bezier(0.23, 1, 0.32, 1)'; 
@@ -68,7 +68,7 @@ const WhyChooseUs = () => {
         const colIndex = index % columns;
         const rowIndex = Math.floor(index / columns);
 
-        // Responsive offsets: cards fly in from center-bottom on mobile
+        
         const translateXOffset = columns === 1 ? 0 : (colIndex - (columns / 2)) * 150;
         const translateYOffset = (rowIndex + 1) * 80;
 
@@ -158,6 +158,7 @@ const WhyChooseUs = () => {
                     >
                         Uniform size, strong shelf life, smooth peel, and perfect maturity for long-distance sea shipments.
                     </p>
+                    <a href="/Products" className="inline-block" >
                     <button
                         className="py-4 px-10 font-semibold rounded-full shadow-xl transition duration-300 uppercase tracking-wider"
                         onMouseEnter={() => setIsHovering(true)}
@@ -168,9 +169,10 @@ const WhyChooseUs = () => {
                             animation: 'cta-pulse 2s infinite',
                             ...slideUpTransition(0.8)
                         }}
-                    >
+                    > 
                         View Product Specifications
                     </button>
+                    </a>
                 </div>
             </div>
         </section>

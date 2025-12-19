@@ -206,7 +206,7 @@ const FinalCTA = () => {
                     </button>
 
                     
-                    {/* Form Button */}
+                    < a href='/WhatsappForm' className='inline-block'>
                     <button
                         className={`py-3 px-8 text-lg font-bold rounded-full transition duration-300 ${BUTTON_CLASS}`}
                         style={formButtonStyle}
@@ -217,6 +217,7 @@ const FinalCTA = () => {
                     >
                         Submit Enquiry Form
                     </button>
+                    </a>
                 </div>
             </div>
         </section>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-// Adjusted imports based on your file names
+
 import video from './assets/video.mp4';
 import video1 from './assets/video_2.mp4';
-// Assuming a third one exists or reusing one for the 3-video requirement
+
 import video2 from './assets/video_1.mp4'; 
 
 const COLORS = {
@@ -20,16 +20,16 @@ const Home = () => {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [contentVisible, setContentVisible] = useState(false);
 
-    // This effect handles the 3-second rotation logic
+    
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
-        }, 3000); // Switches every 3 seconds
+        }, 3000); 
 
         return () => clearInterval(interval);
     }, []);
 
-    // Trigger for text animations
+    
     useEffect(() => {
         const delay = setTimeout(() => {
             setContentVisible(true);
@@ -53,7 +53,7 @@ const Home = () => {
             style={{ backgroundColor: 'black', scrollBehavior: 'smooth' }} 
             className="relative min-h-screen overflow-hidden"
         >
-            {/* Background Video Layer */}
+        
             <div className="absolute inset-0 z-0">
                 {videoSources.map((src, index) => (
                     <video
@@ -74,11 +74,11 @@ const Home = () => {
                         Your browser does not support the video tag.
                     </video>
                 ))}
-                {/* Dark Overlay for contrast */}
+                
                 <div className="absolute inset-0 bg-black/40 z-10"></div>
             </div>
 
-            {/* Content Layer */}
+            
             <div className="relative z-20 flex flex-col items-center justify-center min-h-screen p-4 text-center">
                 
                 <nav className="absolute top-0 w-full p-6 flex justify-between items-center max-w-7xl mx-auto">
@@ -86,12 +86,12 @@ const Home = () => {
                         className="text-xl sm:text-3xl font-bold" 
                         style={{ ...FONT_STYLES.heading, color: COLORS.BananaYellow }}
                     >
-                        Fruthub Exports Pvt. Ltd.
+                        
                     </span>
                     
-                    {/* Visual dots to show which video is playing */}
+                    
                     <div className="flex space-x-2">
-                        {videoSources.map((_, i) => (
+                        {videoSources.map(( i) => (
                             <div 
                                 key={i}
                                 className={`h-1.5 w-6 rounded-full transition-all duration-500 ${
