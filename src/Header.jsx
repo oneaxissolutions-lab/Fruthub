@@ -4,16 +4,15 @@ import { Link } from 'react-router-dom';
 import FrutsHub_logo from './assets/fruthub.png';
 
 const navigation = [
-    { name: 'Home', href: '/' },               
-    { name: 'About', href: '/about' }, 
-    { name: 'Products', href: '/products' }, 
-    { name: 'Markets', href: '/banana-export' }, // Linked to the Banana Export Page
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Products', href: '/products' },
+    { name: 'Markets', href: '/banana-export' },
 ];
 
-const COLOR_WHITE = 'bg-white';      
-const MOBILE_MENU_BG = 'bg-[#0B6A32]'; 
-const DEFAULT_TEXT_COLOR = 'text-[#222222]'; 
-const BRAND_GREEN = '#0B6A32';
+const COLOR_WHITE = 'bg-white';
+const MOBILE_MENU_BG = 'bg-[#0B6A32]';
+const DEFAULT_TEXT_COLOR = 'text-[#222222]';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,56 +21,60 @@ const Header = () => {
     const closeMenu = () => setIsMenuOpen(false);
 
     return (
-        <header className={`fixed top-4 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl ${COLOR_WHITE} shadow-2xl rounded-xl z-[1000] overflow-hidden border-4 border-[#0b6A32]`}>
+        <header className={`fixed top-3 inset-x-0 mx-auto w-[92%] sm:w-[95%] max-w-7xl ${COLOR_WHITE} shadow-xl rounded-xl z-[1000] border-[3px] border-[#0b6A32] overflow-hidden`}>
             <div className="px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    {/* Logo Section */}
+                {/* Height reduced: h-14 for mobile, h-16 for desktop */}
+                <div className="flex items-center justify-between h-14 sm:h-16">
+                    
+                    {/* Logo Section - Scaled down for height efficiency */}
                     <div className="flex-shrink-0">
-                        <Link to="/" className="transition duration-300 transform hover:scale-[1.03] block" onClick={closeMenu}>
-                            <img src={FrutsHub_logo} alt="FrutsHub Logo" className='w-40' />
+                        <Link to="/" className="transition duration-300 block" onClick={closeMenu}>
+                            <img 
+                                src={FrutsHub_logo} 
+                                alt="FrutsHub Logo" 
+                                className='w-28 sm:w-32 md:w-36 object-contain' 
+                            />
                         </Link>
                     </div>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center">
-                        <nav className="flex space-x-8 text-sm font-bold uppercase tracking-wide">
-                            {navigation.map((item) => (
-                                <Link
-                                    key={item.name}
-                                    to={item.href}
-                                    className={`${DEFAULT_TEXT_COLOR} hover:text-[#0B6A32] hover:underline hover:underline-offset-8 hover:decoration-2 hover:decoration-[#0B6A32] px-1 py-2 transition duration-200 transform hover:-translate-y-[1px] whitespace-nowrap`}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
-                        </nav>
-                    </div>
+                    <nav className="hidden lg:flex items-center space-x-2 xl:space-x-6 text-[13px] font-bold uppercase tracking-wider">
+                        {navigation.map((item) => (
+                            <Link
+                                key={item.name}
+                                to={item.href}
+                                className={`${DEFAULT_TEXT_COLOR} hover:text-[#0B6A32] px-3 py-1 transition-colors whitespace-nowrap`}
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
+                    </nav>
 
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden">
+                    {/* Mobile Menu Button - Scaled down */}
+                    <div className="lg:hidden">
                         <button 
                             onClick={toggleMenu} 
-                            className="p-2 text-[#222222] hover:text-[#0B6A32] transition-colors"
+                            className="p-1 text-[#222222] hover:text-[#0B6A32] focus:outline-none"
                             aria-label="Toggle Menu"
                         >
-                            {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+                            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* Mobile Navigation Drawer */}
+            {/* Mobile Navigation Drawer - Compacted padding */}
             <div 
-                className={`md:hidden transition-all duration-300 ease-in-out ${
-                    isMenuOpen ? 'max-h-80 opacity-100 py-4' : 'max-h-0 opacity-0'
+                className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+                    isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
                 } ${MOBILE_MENU_BG}`}
             >
-                <div className="px-4 space-y-2">
+                <div className="px-4 py-3 space-y-1">
                     {navigation.map((item) => (
                         <Link
                             key={item.name}
                             to={item.href}
-                            className="block w-full text-center text-white font-semibold text-lg hover:bg-white/10 py-3 rounded-lg transition"
+                            className="block w-full text-center text-white font-bold text-base hover:bg-black/10 py-3 rounded-lg transition-all"
                             onClick={closeMenu} 
                         >
                             {item.name}
