@@ -16,9 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentVideoIndex(
-        (prevIndex) => (prevIndex + 1) % videoSources.length
-      );
+      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videoSources.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -38,9 +36,11 @@ const Home = () => {
       style={{
         backgroundColor: 'black',
         position: 'relative',
-        minHeight: '100vh',
+        minHeight: '100vh', // Ensure it fills the screen on mobile
         width: '100%',
         overflowX: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       {/* Video Background */}
@@ -52,7 +52,7 @@ const Home = () => {
             autoPlay
             muted
             loop
-            playsInline
+            playsInline // Crucial for iPhone/Android autoplay
             style={{
               position: 'absolute',
               inset: 0,
@@ -69,43 +69,45 @@ const Home = () => {
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundColor: 'rgba(0,0,0,0.4)',
+            backgroundColor: 'rgba(0,0,0,0.5)', // Slightly darker for better text readability
           }}
         />
       </div>
 
-      {/* CONTENT (Navbar safe) */}
-      <div className="relative z-20 min-h-screen pt-[80px]">
+      {/* CONTENT */}
+      <div className="relative z-20 flex flex-col min-h-screen">
+        
+        {/* Responsive Navbar Spacer */}
+        <div className="h-[70px] sm:h-[80px]" />
 
-        {/* Dots */}
-        <div className="absolute top-10 w-full flex justify-center space-x-2">
+        {/* Progress Dots - Moved slightly down to avoid notch/island on new iPhones */}
+        <div className="w-full flex justify-center space-x-2 py-4">
           {videoSources.map((_, i) => (
             <div
               key={i}
               className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === currentVideoIndex
-                  ? 'bg-white w-8'
-                  : 'bg-white/30 w-4'
+                i === currentVideoIndex ? 'bg-white w-8' : 'bg-white/30 w-4'
               }`}
             />
           ))}
         </div>
 
-        {/* Hero Text */}
-        <div className="flex flex-col items-center justify-center h-full text-center px-4">
-          <div className="mt-20 max-w-4xl">
+        {/* Hero Text - Centered vertically and horizontally */}
+        <div className="flex-1 flex flex-col items-center justify-center text-center px-6 pb-20">
+          <div className="max-w-4xl w-full">
             <h1
-              className="text-3xl sm:text-6xl font-extrabold text-white mb-6"
+              className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 leading-tight"
               style={{
                 fontFamily: 'Montserrat, sans-serif',
                 ...getAnimationStyles(0.2),
               }}
             >
-              Premium Indian Bananas for Global Importers
+              Premium Indian Bananas <br className="hidden sm:block" /> 
+              for Global Importers
             </h1>
 
             <p
-              className="text-base sm:text-xl text-white mb-10 max-w-2xl mx-auto"
+              className="text-base sm:text-lg md:text-xl text-white/90 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed"
               style={{
                 fontFamily: 'Lato, sans-serif',
                 ...getAnimationStyles(0.4),
@@ -116,11 +118,11 @@ const Home = () => {
             </p>
 
             <div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full"
               style={getAnimationStyles(0.6)}
             >
               <button
-                className="px-8 py-4 rounded-full font-bold"
+                className="w-full sm:w-auto px-10 py-4 rounded-full font-bold text-lg shadow-lg active:scale-95 transition-transform"
                 style={{
                   backgroundColor: COLORS.BananaYellow,
                   color: COLORS.DarkForest,
@@ -129,7 +131,7 @@ const Home = () => {
                 Get Price Quote
               </button>
 
-              <button className="px-8 py-4 rounded-full border border-white text-white">
+              <button className="w-full sm:w-auto px-10 py-4 rounded-full border border-white text-white font-bold text-lg hover:bg-white/10 active:scale-95 transition-all">
                 Company Profile
               </button>
             </div>
