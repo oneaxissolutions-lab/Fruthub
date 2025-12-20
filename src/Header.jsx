@@ -1,89 +1,60 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import FrutsHub_logo from './assets/fruthub.png';
-
-const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Products', href: '/products' },
-    { name: 'Markets', href: '/banana-export' },
-];
-
-const COLOR_WHITE = 'bg-white';
-const MOBILE_MENU_BG = 'bg-[#0B6A32]';
-const DEFAULT_TEXT_COLOR = 'text-[#222222]';
+import logo from '../assets/logo.png'; // Path check kar lena
 
 const Header = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-    const closeMenu = () => setIsMenuOpen(false);
+  return (
+    <nav className="fixed top-0 left-0 w-full z-[100] bg-white shadow-md">
+      {/* Container - max-width aur px-4-6 zaroori hai side overflow rokne ke liye */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          
+          {/* Logo Section */}
+          <div className="flex-shrink-0 flex items-center">
+            <img 
+              src={logo} 
+              alt="Fruthub Logo" 
+              className="h-12 md:h-16 w-auto object-contain" 
+            />
+          </div>
 
-    return (
-        <header className={`fixed top-3 inset-x-0 mx-auto w-[92%] sm:w-[95%] max-w-7xl ${COLOR_WHITE} shadow-xl rounded-xl z-[1000] border-[3px] border-[#0b6A32] overflow-hidden`}>
-            <div className="px-4 sm:px-6 lg:px-8">
-                {/* Height reduced: h-14 for mobile, h-16 for desktop */}
-                <div className="flex items-center justify-between h-14 sm:h-16">
-                    
-                    {/* Logo Section - Scaled down for height efficiency */}
-                    <div className="flex-shrink-0">
-                        <Link to="/" className="transition duration-300 block" onClick={closeMenu}>
-                            <img 
-                                src={FrutsHub_logo} 
-                                alt="FrutsHub Logo" 
-                                className='w-28 sm:w-32 md:w-36 object-contain' 
-                            />
-                        </Link>
-                    </div>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-8 items-center">
+            <a href="/" className="text-gray-700 hover:text-yellow-600 font-medium">Home</a>
+            <a href="/about" className="text-gray-700 hover:text-yellow-600 font-medium">About</a>
+            <a href="/gallery" className="text-gray-700 hover:text-yellow-600 font-medium">Gallery</a>
+            <a href="/contact" className="bg-yellow-500 text-white px-5 py-2 rounded-full font-bold hover:bg-yellow-600 transition">
+              Contact Us
+            </a>
+          </div>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center space-x-2 xl:space-x-6 text-[13px] font-bold uppercase tracking-wider">
-                        {navigation.map((item) => (
-                            <Link
-                                key={item.name}
-                                to={item.href}
-                                className={`${DEFAULT_TEXT_COLOR} hover:text-[#0B6A32] px-3 py-1 transition-colors whitespace-nowrap`}
-                            >
-                                {item.name}
-                            </Link>
-                        ))}
-                    </nav>
-
-                    {/* Mobile Menu Button - Scaled down */}
-                    <div className="lg:hidden">
-                        <button 
-                            onClick={toggleMenu} 
-                            className="p-1 text-[#222222] hover:text-[#0B6A32] focus:outline-none"
-                            aria-label="Toggle Menu"
-                        >
-                            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Mobile Navigation Drawer - Compacted padding */}
-            <div 
-                className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-                    isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
-                } ${MOBILE_MENU_BG}`}
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-700 hover:text-yellow-600 focus:outline-none p-2"
             >
-                <div className="px-4 py-3 space-y-1">
-                    {navigation.map((item) => (
-                        <Link
-                            key={item.name}
-                            to={item.href}
-                            className="block w-full text-center text-white font-bold text-base hover:bg-black/10 py-3 rounded-lg transition-all"
-                            onClick={closeMenu} 
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                </div>
-            </div>
-        </header>
-    );
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Sidebar/Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+          <div className="px-4 pt-2 pb-6 space-y-2">
+            <a href="/" className="block px-3 py-3 text-gray-700 font-semibold border-b border-gray-50">Home</a>
+            <a href="/about" className="block px-3 py-3 text-gray-700 font-semibold border-b border-gray-50">About</a>
+            <a href="/gallery" className="block px-3 py-3 text-gray-700 font-semibold border-b border-gray-50">Gallery</a>
+            <a href="/contact" className="block px-3 py-3 text-yellow-600 font-bold">Contact Us</a>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
 };
 
 export default Header;
