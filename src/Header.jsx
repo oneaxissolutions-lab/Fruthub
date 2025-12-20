@@ -1,61 +1,89 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import logo from '../assets/logo.png'; 
+import { Link } from 'react-router-dom';
+import FrutsHub_logo from './assets/fruthub.png';
+
+const navigation = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Products', href: '/products' },
+    { name: 'Markets', href: '/banana-export' },
+];
+
+const COLOR_WHITE = 'bg-white';
+const MOBILE_MENU_BG = 'bg-[#0B6A32]';
+const DEFAULT_TEXT_COLOR = 'text-[#222222]';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  return (
-    // left-0 aur right-0 dono dene se width fix ho jati hai
-    <nav className="fixed top-0 left-0 right-0 w-full z-[100] bg-white shadow-md border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          
-          {/* Logo - iski width ko mobile par restrict kiya hai */}
-          <div className="flex-shrink-0">
-            <img 
-              src={logo} 
-              alt="Fruthub Logo" 
-              className="h-10 md:h-16 w-auto object-contain max-w-[180px] md:max-w-none" 
-            />
-          </div>
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+    const closeMenu = () => setIsMenuOpen(false);
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8 items-center">
-            <a href="/" className="text-gray-700 hover:text-yellow-600 font-medium transition-colors">Home</a>
-            <a href="/about" className="text-gray-700 hover:text-yellow-600 font-medium transition-colors">About</a>
-            <a href="/gallery" className="text-gray-700 hover:text-yellow-600 font-medium transition-colors">Gallery</a>
-            <a href="/contact" className="bg-yellow-500 text-white px-6 py-2.5 rounded-full font-bold hover:bg-yellow-600 transition shadow-sm">
-              Contact Us
-            </a>
-          </div>
+    return (
+        <header className={`fixed top-3 inset-x-0 mx-auto w-[92%] sm:w-[95%] max-w-7xl ${COLOR_WHITE} shadow-xl rounded-xl z-[1000] border-[3px] border-[#0b6A32] overflow-hidden`}>
+            <div className="px-4 sm:px-6 lg:px-8">
+                {/* Height reduced: h-14 for mobile, h-16 for desktop */}
+                <div className="flex items-center justify-between h-14 sm:h-16">
+                    
+                    {/* Logo Section - Scaled down for height efficiency */}
+                    <div className="flex-shrink-0">
+                        <Link to="/" className="transition duration-300 block" onClick={closeMenu}>
+                            <img 
+                                src={FrutsHub_logo} 
+                                alt="FrutsHub Logo" 
+                                className='w-28 sm:w-32 md:w-36 object-contain' 
+                            />
+                        </Link>
+                    </div>
 
-          {/* Mobile Menu Button - alignment fixed */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              aria-label="Toggle Menu"
+                    {/* Desktop Navigation */}
+                    <nav className="hidden lg:flex items-center space-x-2 xl:space-x-6 text-[13px] font-bold uppercase tracking-wider">
+                        {navigation.map((item) => (
+                            <Link
+                                key={item.name}
+                                to={item.href}
+                                className={`${DEFAULT_TEXT_COLOR} hover:text-[#0B6A32] px-3 py-1 transition-colors whitespace-nowrap`}
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
+                    </nav>
+
+                    {/* Mobile Menu Button - Scaled down */}
+                    <div className="lg:hidden">
+                        <button 
+                            onClick={toggleMenu} 
+                            className="p-1 text-[#222222] hover:text-[#0B6A32] focus:outline-none"
+                            aria-label="Toggle Menu"
+                        >
+                            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Navigation Drawer - Compacted padding */}
+            <div 
+                className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+                    isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+                } ${MOBILE_MENU_BG}`}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Sidebar - isme w-full aur left-0 ensure kiya hai */}
-      {isOpen && (
-        <div className="md:hidden bg-white absolute top-20 left-0 w-full shadow-xl border-t border-gray-100 animate-in fade-in slide-in-from-top-2">
-          <div className="px-4 py-6 space-y-4">
-            <a href="/" onClick={() => setIsOpen(false)} className="block text-lg font-semibold text-gray-800 border-b pb-2">Home</a>
-            <a href="/about" onClick={() => setIsOpen(false)} className="block text-lg font-semibold text-gray-800 border-b pb-2">About</a>
-            <a href="/gallery" onClick={() => setIsOpen(false)} className="block text-lg font-semibold text-gray-800 border-b pb-2">Gallery</a>
-            <a href="/contact" onClick={() => setIsOpen(false)} className="block text-lg font-bold text-yellow-600">Contact Us</a>
-          </div>
-        </div>
-      )}
-    </nav>
-  );
+                <div className="px-4 py-3 space-y-1">
+                    {navigation.map((item) => (
+                        <Link
+                            key={item.name}
+                            to={item.href}
+                            className="block w-full text-center text-white font-bold text-base hover:bg-black/10 py-3 rounded-lg transition-all"
+                            onClick={closeMenu} 
+                        >
+                            {item.name}
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        </header>
+    );
 };
 
 export default Header;
