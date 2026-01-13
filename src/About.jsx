@@ -133,13 +133,13 @@ const AboutPage = () => {
           <motion.div variants={itemVariants} className="bg-white p-10 rounded-3xl shadow-lg border-t-8 border-yellow-500">
             <Globe className="mb-6 text-yellow-600 w-10 h-10" />
             <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-            <p className="text-gray-600">To connect global markets with reliable, quality-driven banana supplies.</p>
+            <p className="text-gray-600">To connect global markets with reliable, quality-driven Fruits & veggies supplies.</p>
           </motion.div>
           
           <motion.div variants={itemVariants} className="bg-white p-10 rounded-3xl shadow-lg border-t-8 border-green-600">
             <ShieldCheck className="mb-6 text-green-600 w-10 h-10" />
             <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-            <p className="text-gray-600">To be recognized as India’s most reliable and professional banana exporter.</p>
+            <p className="text-gray-600">To be recognized as India’s most reliable and professional Fruits & vegetables exporter.</p>
           </motion.div>
         </motion.div>
       </section>
