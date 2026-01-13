@@ -88,7 +88,7 @@ const Frequent= () => {
       {/* --- Header Section --- */}
       <div className="text-center">
         <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl mb-4">
-          🍌 Frequently Asked Questions
+           Frequently Asked Questions
         </h1>
         <p className="text-xl text-gray-600">
           Find answers to common questions about ordering, logistics, and product specifications.

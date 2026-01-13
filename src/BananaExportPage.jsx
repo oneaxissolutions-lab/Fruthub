@@ -1,159 +1,132 @@
-import React from 'react';
-import { Ship, Globe, CheckCircle, ArrowRight, Anchor, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Ship, Globe, CheckCircle, ArrowRight, Anchor, ArrowLeft, Leaf, Truck, ShieldCheck } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const BananaExport = () => {
+const BananaExportPage = () => {
+  const navigate = useNavigate();
+
+  // 1. Hooks (Hamesha sabse upar)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // 2. Event Handlers
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "919817008240";
+    const message = "Hello Fruthub Exports! I would like to request a quotation for export markets (UAE/Iran/Global).";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  // 3. Data/Configs
   const markets = [
-    { name: "United Arab Emirates (UAE)", flag: "🇦🇪", port: "Jebel Ali / Abu Dhabi" },
-    { name: "Iran", flag: "🇮🇷", port: "Chabahar / Bandar Abbas" },
-    { name: "Middle East & Gulf", flag: "🌍", port: "All Major Ports" },
-    { name: "Global Markets", flag: "📍", port: "On Request" }
+    { name: "United Arab Emirates (UAE)", flag: "🇦🇪", port: "Jebel Ali / Abu Dhabi", produce: "Onions, Bananas, Grapes" },
+    { name: "Iran", flag: "🇮🇷", port: "Chabahar / Bandar Abbas", produce: "Bananas, Pomegranates" },
+    { name: "Middle East & Gulf", flag: "🌍", port: "All Major Ports", produce: "Mixed Vegetables & Fruits" },
+    { name: "Global Markets", flag: "📍", port: "On Request", produce: "Custom Seasonal Supply" }
   ];
 
-  // Animation Variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
+  const smoothScrollConfig = {
+    initial: "hidden",
+    whileInView: "visible",
+    viewport: { once: true, amount: 0.1 }
+  };
+
+  const slideDownVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
     }
   };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { type: 'spring', damping: 25, stiffness: 100 } 
+    }
   };
 
+  // 4. Return JSX
   return (
     <div className="min-h-screen bg-white pt-32 pb-16 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Back Arrow - Slips in from left */}
+        {/* Back Button */}
         <motion.div 
-          initial={{ x: -20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           className="mb-10"
         >
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 text-[#0B6A32] font-bold py-2 px-4 rounded-lg border-2 border-[#0B6A32] hover:bg-[#0B6A32] hover:text-white transition-all duration-300 group shadow-md"
+          <button 
+            onClick={() => navigate('/')} 
+            className="inline-flex items-center gap-2 text-[#0B6A32] font-bold py-2 px-4 rounded-lg border-2 border-[#0B6A32] hover:bg-[#0B6A32] hover:text-white transition-all shadow-md"
           >
-            <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft size={20} />
             Back to Home
-          </Link>
+          </button>
         </motion.div>
 
-        {/* SEO Title Section - Fade Up */}
+        {/* Title Section */}
         <motion.div 
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          initial="hidden"
+          animate="visible"
+          variants={slideDownVariants}
           className="text-center max-w-4xl mx-auto mb-16"
         >
-          <h1 className="text-3xl md:text-5xl font-extrabold text-[#222222] leading-tight uppercase tracking-tight">
-            Banana Exports from India to <br/>
-            <span className="text-[#0B6A32] drop-shadow-sm">UAE, Iran & Global Markets</span>
+          <h1 className="text-3xl md:text-6xl font-extrabold text-[#222222] uppercase">
+            Indian Fruits & Vegetables Export to <br/>
+            <span className="text-[#0B6A32]">UAE, Iran & Global Markets</span>
           </h1>
-          <motion.div 
-            initial={{ width: 0 }}
-            whileInView={{ width: "6rem" }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="h-2 bg-[#0B6A32] mx-auto mt-6 rounded-full"
-          ></motion.div>
-          <p className="mt-8 text-xl text-gray-600 leading-relaxed">
-            Fruthub Exports Pvt. Ltd. supplies premium Cavendish bananas to multiple international markets, 
-            working closely with importers, wholesalers, and ripeners.
+          <p className="mt-8 text-xl text-gray-600">
+            Fruthub Exports Pvt. Ltd. is a leading name in the global supply of premium Indian produce.
           </p>
         </motion.div>
 
-        {/* Market Focus Cards - Staggered Entrance */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
-        >
+        {/* Markets Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {markets.map((market, index) => (
             <motion.div 
-              key={index} 
+              key={index}
+              {...smoothScrollConfig}
               variants={itemVariants}
-              whileHover={{ scale: 1.03, y: -5 }}
-              className="bg-gray-50 p-8 rounded-2xl border-b-4 border-transparent hover:border-[#0B6A32] transition-colors shadow-sm hover:shadow-xl cursor-default"
+              className="bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-sm"
             >
               <span className="text-5xl mb-4 block">{market.flag}</span>
-              <h3 className="text-xl font-bold text-[#222222] mb-2">{market.name}</h3>
-              <p className="text-sm text-[#0B6A32] font-medium flex items-center gap-2 uppercase tracking-wider">
-                <Anchor size={14} /> {market.port}
-              </p>
+              <h3 className="text-xl font-bold mb-2">{market.name}</h3>
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{market.port}</p>
+              <p className="mt-2 text-sm text-gray-600 italic">{market.produce}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Supply Capabilities & CTA - Slide in from Bottom */}
+        {/* CTA Card with WhatsApp Redirect */}
         <motion.div 
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="grid lg:grid-cols-2 gap-0 bg-[#0B6A32] rounded-[2rem] overflow-hidden text-white shadow-2xl"
+          {...smoothScrollConfig}
+          variants={itemVariants}
+          className="grid lg:grid-cols-2 bg-[#0B6A32] rounded-[3rem] overflow-hidden text-white shadow-2xl"
         >
-          <div className="p-8 md:p-16">
-            <motion.h2 
-               initial={{ opacity: 0 }}
-               whileInView={{ opacity: 1 }}
-               transition={{ delay: 0.3 }}
-               className="text-3xl font-bold mb-6 text-yellow-400 uppercase"
+          <div className="p-8 md:p-16 flex flex-col justify-center">
+            <h2 className="text-3xl md:text-4xl font-black mb-6 uppercase">
+               Reliable Multi-Produce <br/> Supplier from India
+            </h2>
+            <button 
+              onClick={handleWhatsAppClick}
+              className="inline-flex items-center gap-3 bg-white text-[#0B6A32] px-8 py-5 rounded-2xl font-black text-lg hover:bg-yellow-400 transition-all shadow-lg w-fit"
             >
-                Reliable Indian Banana Supplier
-            </motion.h2>
-            <p className="text-green-50 text-lg mb-8 leading-relaxed">
-              If you are an importer, ripener, or wholesale distributor looking for a reliable 
-              banana supplier from India, we can customize packing and documentation 
-              as per your country’s requirements.
-            </p>
-            
-            <div className="space-y-4 mb-10">
-              {['Customized Branding/Packing', 'Phytosanitary Certification', 'Cold Chain Management'].map((item, i) => (
-                <motion.div 
-                  initial={{ x: -10, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.5 + (i * 0.1) }}
-                  key={i} 
-                  className="flex items-center gap-3"
-                >
-                  <CheckCircle className="text-yellow-400" size={24} />
-                  <span className="font-semibold">{item}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link 
-                  to="/contact" 
-                  className="inline-flex items-center gap-3 bg-white text-[#0B6A32] px-10 py-5 rounded-xl font-black text-lg hover:bg-yellow-400 hover:text-black transition-all group uppercase tracking-tighter shadow-lg"
-                >
-                  Share Your Country & Port Details
-                  <ArrowRight className="group-hover:translate-x-2 transition-transform" size={24} />
-                </Link>
-            </motion.div>
+              Request Quotation by Port
+              <ArrowRight size={24} />
+            </button>
           </div>
-          
-          <motion.div 
-            initial={{ scale: 1.1, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.2 }}
-            className="h-full min-h-[500px] bg-[url('https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&q=80')] bg-cover bg-center relative"
-          >
-            <div className="absolute inset-0 bg-green-900/10 shadow-inner"></div>
-          </motion.div>
+          <div className="h-full min-h-[400px] bg-[url('https://images.unsplash.com/photo-1610348725531-843dff563e2c?auto=format&fit=crop&q=80')] bg-cover bg-center" />
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default BananaExport;
+export default BananaExportPage;

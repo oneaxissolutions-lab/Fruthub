@@ -21,7 +21,7 @@ const FONT_STYLES = {
 };
 
 const differentiators = [
-    { icon: '🥇', title: '100+ Years Legacy', detail: 'A century of experience in sourcing & grading bananas.', color: COLORS.BananaYellow },
+    { icon: '🥇', title: '100+ Years Legacy', detail: 'A century of experience in sourcing & grading fruit and vegetables.', color: COLORS.BananaYellow },
     { icon: '✅', title: 'Strict Quality Control', detail: 'Complete checks from farm to container sealing.', color: COLORS.BananaYellow },
     { icon: '🗓️', title: 'Consistent Supply', detail: 'Strong farmer network ensures year-round availability.', color: COLORS.BananaYellow },
     { icon: '📜', title: 'Expert Documentation', detail: 'Phytosanitary, Certificate of Origin, Invoice, Fumigation & more.', color: COLORS.BananaYellow },
@@ -150,7 +150,7 @@ const WhyChooseUs = () => {
                         className="text-3xl md:text-5xl font-extrabold mb-6 text-white tracking-wide" 
                         style={{ ...FONT_STYLES.heading, ...slideUpTransition(0.4) }} 
                     >
-                        Export-Grade Cavendish Bananas 
+                        Delivering Export-Quality Produce Worldwide
                     </h2>
                     <p 
                         className="text-lg md:text-xl mb-12 text-white leading-relaxed" 

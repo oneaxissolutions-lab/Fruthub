@@ -8,6 +8,7 @@ const navigation = [
     { name: 'About', href: '/about' },
     { name: 'Products', href: '/products' },
     { name: 'Markets', href: '/banana-export' },
+    { name: 'Fruits & Vegetables', href: '/fruit' }
 ];
 
 const Header = () => {

@@ -196,7 +196,7 @@ const AboutUs = () => {
                                 ...slideInRightTransition(TEXT_BASE_DELAY) 
                             }}
                         >
-                            About Fruthub Exports Private Limited
+                            About FrutsHub Exports Private Limited
                         </h2>
                         
                         
@@ -210,7 +210,7 @@ const AboutUs = () => {
                                 ...slideInRightTransition(TEXT_BASE_DELAY + 0.2) 
                             }}
                         >
-                            Fruthub carries a 100-year-old family legacy in India’s banana trade. For generations, our family supplied bananas to major domestic mandis all across India.
+                            Frutshub carries a 100-year-old family legacy in India’s agricultural trade. For generations, our family has been a trusted supplier to major domestic mandis across the country, building deep roots in the farming community.
                         </p>
                         
                         
@@ -223,8 +223,7 @@ const AboutUs = () => {
                                
                                 ...slideInRightTransition(TEXT_BASE_DELAY + 0.4) 
                             }}
-                        >
-                            Today, Fruthub Exports Private Limited combines this century-old experience with modern packhouse systems to deliver premium Cavendish bananas to international importers.
+                        >Today, Frutshub Exports Private Limited combines this century of experience with modern packhouse systems to bridge the gap between Indian farms and the global market. We specialize in the export of premium produce, ensuring that the freshness of our fields reaches the world in peak condition.
                         </p>
                         
                         
@@ -238,7 +237,7 @@ const AboutUs = () => {
                                 ...slideInRightTransition(TEXT_BASE_DELAY + 0.6) 
                             }}
                         >
-                            We source from high-yield banana belts in Madhya Pradesh, Maharashtra and South India, ensuring round-the-year availability.
+                           We source directly from high-yield agricultural belts in Madhya Pradesh, Maharashtra, and South India. By managing our own supply chain and sourcing "On Demand," we ensure year-round availability and the highest standards of food safety for our international partners.
                         </p>
 
                         

@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './assets/logo.png';
 
 // Configuration
-const WHATSAPP_NUMBER = '1234567890'; // Replace with your full WhatsApp number (including country code, no +, no spaces)
+const WHATSAPP_NUMBER ='9817008240'; // Replace with your full WhatsApp number (including country code, no +, no spaces)
 const DEFAULT_MESSAGE = 'Hello! I saw your website and would like to chat.';
 
 const Floating = () => {
@@ -23,7 +23,7 @@ const Floating = () => {
         <img 
           src={logo} 
           alt="WhatsApp Chat" 
-          className="w-full h-full object-contain"
+          className="w-12 h-12 object-contain"
         />
       </div>
     </a>

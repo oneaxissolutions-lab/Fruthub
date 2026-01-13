@@ -7,16 +7,20 @@ import Get from './Get';
 import Home from './Home';
 import AboutUs from './AboutUs'; 
 import About from './About';    
-import Product from './Product'; // 1. Import Product
+import Product from './Product';
 import WhyChooseUs from './WhyChooseUs';
 import SupplyCapacity from './SupplyCapacity';
 import Frequent from './Frequent';
 import Markets from './Markets';
-import Gallery from './Gallery';        
 import FinalCTA from './FinalCTA';
 import TermsAndConditions from './TermsandCconditions';
 import Footer from './Footer';
-import BananaExportPage from './BananaExportPage'; // 3. Import BananaExportPage
+import BananaExportPage from './BananaExportPage';
+import Fruit from './Fruit';
+import EnquiryForm from './EnquiryForm';
+
+// --- यहाँ Gallery को इम्पोर्ट करें ---
+import Gallery from './Gallery'; 
 
 const HomePage = () => (
     <>
@@ -26,7 +30,6 @@ const HomePage = () => (
         <SupplyCapacity />
         <Frequent />       
         <Markets />
-        <Gallery />
         <FinalCTA />
         <TermsAndConditions />
     </>
@@ -57,8 +60,12 @@ function App() {
                         <Routes>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/about" element={<About />} />
-                            <Route path="/products" element={<Product />} /> {/* 2. Add Route */}
+                            <Route path="/products" element={<Product />} />
                             <Route path="/banana-export" element={<BananaExportPage />} />
+                            <Route path="/fruit" element={<Fruit />} />
+                            
+                            {/* --- Gallery का नया Route यहाँ जोड़ें --- */}
+                            <Route path="/gallery" element={<Gallery />} />
                         </Routes>
                         
                         <div className="h-20"></div> 

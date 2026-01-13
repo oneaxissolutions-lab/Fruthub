@@ -54,7 +54,7 @@ const WelcomeSplashPage = ({ onLoaded }) => {
                     className="text-2xl sm:text-4xl font-bold tracking-wide mb-10" 
                     style={{ color: COLORS.BananaYellow }}
                 >
-                    FRUTHUB EXPORT PVT LTD
+                    FRUTSHUB EXPORT PVT LTD
                 </h2>
                 
                 
@@ -79,7 +79,7 @@ const WelcomeSplashPage = ({ onLoaded }) => {
                     className="text-md"
                     style={{ color: COLORS.DeepGreen }}
                 >
-                    View loads in 4 seconds...
+                    
                 </p>
             </div>
         </div>
