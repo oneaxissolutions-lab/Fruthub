@@ -73,7 +73,7 @@ const WelcomeSplashPage = ({ onLoaded }) => {
                     className="text-xl"
                     style={{ color: COLORS.DeepGreen }} 
                 >
-                    Sourcing the World's Best Bananas.
+                    Sourcing the World's Best Fruits and Vegetables .
                 </p>
                 <p 
                     className="text-md"
