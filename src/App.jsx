@@ -18,8 +18,8 @@ const App = () => {
       {/* Sad file icon style */}
       <div
         style={{
-          fontSize: "60px",
-          marginBottom: "20px",
+          fontSize: "30px",
+          marginBottom: "30px",
           opacity: 0.8,
         }}
       >
