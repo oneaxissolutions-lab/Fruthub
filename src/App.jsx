@@ -5,24 +5,33 @@ const App = () => {
     <div
       style={{
         height: "100vh",
+        backgroundColor: "#121212",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#000000",
-        color: "#ffffff",
         fontFamily: "Arial, sans-serif",
+        color: "#e0e0e0",
         textAlign: "center",
       }}
     >
-      <div style={{ fontSize: "80px", marginBottom: "20px" }}></div>
+      {/* Sad file icon style */}
+      <div
+        style={{
+          fontSize: "60px",
+          marginBottom: "20px",
+          opacity: 0.8,
+        }}
+      >
+        📄❌
+      </div>
 
-      <h1 style={{ margin: "0 0 10px 0", fontWeight: "500" }}>
-        Website Not Available
-      </h1>
+      <h2 style={{ fontWeight: "normal", marginBottom: "10px" }}>
+        This webpage is not available
+      </h2>
 
-      <p style={{ margin: 0, opacity: 0.7, fontSize: "14px" }}>
-        This site is currently disabled.
+      <p style={{ fontSize: "13px", opacity: 0.6 }}>
+        The site is currently disabled.
       </p>
     </div>
   );
