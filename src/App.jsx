@@ -15,7 +15,7 @@ const App = () => {
         textAlign: "center",
       }}
     >
-      <div style={{ fontSize: "80px", marginBottom: "20px" }}>🚫</div>
+      <div style={{ fontSize: "80px", marginBottom: "20px" }}></div>
 
       <h1 style={{ margin: "0 0 10px 0", fontWeight: "500" }}>
         Website Not Available
